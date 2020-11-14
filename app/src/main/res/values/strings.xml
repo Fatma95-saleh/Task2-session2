@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Login_Wave</string>
+    <string name="login">LOGIN</string>
+    <string name="new_user_register_now">New User ? Register Now</string>
+</resources>
