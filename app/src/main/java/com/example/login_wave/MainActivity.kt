@@ -23,19 +23,29 @@ class MainActivity : AppCompatActivity() {
 
             val phone = phoneField.text.toString()
             val pass = passwordField.text.toString()
+            
+             val passwordREGEX = Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{8,}" +               //at least 8 characters
+                    "$")
 
             if (phone.isEmpty() && pass.isEmpty()) {
                 textLogin.text = "Enter username and password please"
             }
 
             if (phone.length > 11 && phone.isNotEmpty()) {
-                if (pass.isNotEmpty()) {
+                if (pass.isNotEmpty()&&passwordREGEX.matcher(pass).matches()) {
                     text_password.text = ""
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     text_number.text = ""
                 } else {
-                    text_password.text = "you should enter password"
+                     text_password.text = "password is to weak"
                 }
             } else {
                 text_number.text = "You should Enter phone number with only 11 number"
